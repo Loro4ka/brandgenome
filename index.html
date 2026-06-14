@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Genome — Impression Scan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #141414;
+    --red: #e63a1e;
+    --orange: #f25c1e;
+    --green: #a8e63a;
+    --magenta: #d932c8;
+    --white: #ffffff;
+    --grey: #888888;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--black);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 48px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo img { width: 100px; height: auto; transition: transform 0.3s, opacity 0.3s; }
+  .nav-logo { margin-top: 50px; }
+  .nav-logo:hover img { transform: scale(1.08); opacity: 0.85; }
+
+  .nav-brand {
+    font-size: 110px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .nav-cta {
+    margin-top: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-2px); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px 80px;
+    overflow: hidden;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  @keyframes orbDrift1 {
+    0% { transform: translate(60px, 0); }
+    25% { transform: translate(0, -40px); }
+    50% { transform: translate(-60px, 0); }
+    75% { transform: translate(0, 40px); }
+    100% { transform: translate(60px, 0); }
+  }
+  @keyframes orbDrift2 {
+    0% { transform: translate(-50px, 0); }
+    25% { transform: translate(0, 50px); }
+    50% { transform: translate(50px, 0); }
+    75% { transform: translate(0, -50px); }
+    100% { transform: translate(-50px, 0); }
+  }
+  @keyframes orbDrift3 {
+    0% { transform: translate(0, -40px); }
+    33% { transform: translate(50px, 20px); }
+    66% { transform: translate(-50px, 20px); }
+    100% { transform: translate(0, -40px); }
+  }
+  @keyframes orbPulse {
+    0%, 100% { transform: translate(-50%, -55%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -55%) scale(1.4); opacity: 1; }
+  }
+
+  .orb-red {
+    width: 640px; height: 480px;
+    background: radial-gradient(ellipse, rgba(230,58,30,0.8) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    animation: orbPulse 2.5s ease-in-out infinite;
+  }
+  .orb-green {
+    width: 480px; height: 480px;
+    background: radial-gradient(ellipse, rgba(168,230,58,0.55) 0%, transparent 70%);
+    top: 25%; left: 5%;
+    animation: orbDrift1 4s ease-in-out infinite;
+  }
+  .orb-magenta {
+    width: 380px; height: 380px;
+    background: radial-gradient(ellipse, rgba(255,100,0,0.7) 0%, transparent 70%);
+    bottom: 15%; left: 20%;
+    animation: orbDrift2 3s ease-in-out infinite;
+  }
+  .orb-cyan {
+    width: 300px; height: 300px;
+    background: radial-gradient(ellipse, rgba(255,160,0,0.65) 0%, transparent 70%);
+    top: 40%; right: 10%;
+    animation: orbDrift3 5s ease-in-out infinite;
+  }
+  .orb-yellow {
+    width: 220px; height: 220px;
+    background: radial-gradient(ellipse, rgba(255,200,0,0.45) 0%, transparent 70%);
+    bottom: 30%; right: 15%;
+    animation: orbDrift1 5s ease-in-out infinite reverse;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .hero h1 span { color: var(--red); }
+  .hero h1 .hero-tagline {
+    display: block;
+    font-size: clamp(14px, 1.8vw, 20px);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.5);
+    margin-top: 12px;
+    text-transform: none;
+  }
+
+  .hero-sub {
+    margin-top: 56px;
+    font-size: clamp(13px, 1.6vw, 15px);
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    line-height: 1.45;
+    position: relative;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-actions {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--green); background: rgba(168,230,58,0.06); }
+
+  .hero-scroll {
+    margin-top: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* ── WHAT IS ── */
+  .section {
+    padding: 120px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .section-body {
+    font-size: clamp(13px, 1.6vw, 15px);
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    line-height: 1.45;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .what-visual {
+    position: relative;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+  }
+  .ring-1 { width: 240px;height:240px; border-color: rgba(230,58,30,0.6); animation: ringPulse 2.5s ease-in-out infinite; border-width:2px; }
+  .ring-2 { width: 320px;height:320px; border-color: rgba(180,60,220,0.5); animation: spin 12s linear infinite, ringPulse 3s ease-in-out infinite; }
+  .ring-3 { width: 180px;height:180px; border-color: rgba(255,100,0,0.45); animation: spin 8s linear infinite reverse, ringPulse 2.5s ease-in-out infinite reverse; }
+  .ring-4 { width: 280px;height:280px; border-color: rgba(140,220,40,0.5); animation: spin 10s linear infinite, ringPulse 4s ease-in-out infinite; border-width:2px; }
+  .ring-5 { width: 200px;height:200px; border-color: rgba(255,60,20,0.5); animation: spin 7s linear infinite reverse, ringPulse 3.5s ease-in-out infinite; border-width:2px; }
+  .ring-6 { width: 360px;height:360px; border-color: rgba(180,240,60,0.45); animation: spin 16s linear infinite, ringPulse 5s ease-in-out infinite reverse; }
+
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .ring-center {
+    width: 80px; height: 80px;
+    background: var(--red);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  /* ── 3 LEVELS ── */
+  .levels-section {
+    background: var(--dark);
+    padding: 120px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .levels-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(168,230,58,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .levels-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .levels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+
+  .level-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding:120px 96px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .level-card:hover { border-color: rgba(255,255,255,0.2); }
+
+  .level-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .level-card.visual::before { background: var(--red); }
+  .level-card.semantic::before { background: var(--magenta); }
+  .level-card.audience::before { background: var(--green); }
+
+  .level-num {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.08;
+    letter-spacing: -0.04em;
+    position: absolute;
+    top: 24px; right: 24px;
+  }
+  .level-card.visual .level-num { color: var(--red); opacity: 0.15; }
+  .level-card.semantic .level-num { color: var(--magenta); opacity: 0.15; }
+  .level-card.audience .level-num { color: var(--green); opacity: 0.15; }
+
+  .level-icon {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .level-card.visual .level-icon { background: rgba(230,58,30,0.15); }
+  .level-card.semantic .level-icon { background: rgba(217,50,200,0.15); }
+  .level-card.audience .level-icon { background: rgba(168,230,58,0.15); }
+
+  .level-name {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .level-q {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    margin-top: 18px;
+  }
+  .level-card.visual .level-q { color: var(--red); }
+  .level-card.semantic .level-q { color: var(--magenta); }
+  .level-card.audience .level-q { color: var(--green); }
+
+  .level-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+  }
+
+  /* ── DELIVERABLES ── */
+  .deliverables-section {
+    padding: 120px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .del-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+
+  .del-card {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 36px 28px;
+    transition: transform 0.25s;
+  }
+  .del-card:hover { transform: translateY(-4px); }
+
+  .del-number {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .del-title {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .del-body {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+
+  /* ── REPORT PREVIEW ── */
+  .report-preview { padding-top: 60px; }
+
+  .report-piles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: -102px;
+  }
+
+  .pile { text-align: center; }
+
+  .pile-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 24px;
+  }
+
+  .pile-stack {
+    position: relative;
+    min-height: 460px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .pile-stack img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    transition: transform 0.3s, z-index 0.3s;
+    position: absolute;
+    top: 0;
+  }
+  .pile-stack img:nth-child(1) { transform: rotateX(2deg); z-index: 2; }
+  .pile-stack img:nth-child(2) { transform: rotateX(-2deg) translateY(24px); z-index: 1; }
+  .pile-stack img:nth-child(3) { transform: rotateX(2deg) translateY(48px); z-index: 0; }
+  .pile-stack img:hover { transform: rotateX(0deg) translateY(0) scale(1.05); z-index: 20; }
+
+  @media (max-width: 900px) {
+    .report-piles { grid-template-columns: 1fr; gap: 48px; }
+    .pile-stack { min-height: 380px; }
+    .pile-stack img { max-width: 240px; }
+  }
+
+  @media (max-width: 560px) {
+    .pile-stack { min-height: 320px; }
+    .pile-stack img { max-width: 190px; }
+  }
+
+  /* ── PROCESS ── */
+  .process-section {
+    background: var(--dark);
+    padding: 120px 24px;
+    position: relative;
+    overflow: hidden;
+    margin-top: -350px;
+  }
+  .process-section::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 400px;
+    background: radial-gradient(ellipse, rgba(217,50,200,0.12) 0%, transparent 70%);
+    bottom: -80px; left: -80px;
+    pointer-events: none;
+  }
+
+  .process-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .process-steps {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 32px; left: 64px; right: 64px;
+    height: 1px;
+    background: linear-gradient(to right, var(--red), var(--magenta), var(--green));
+    opacity: 0.4;
+  }
+
+  .step {
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-dot {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    background: var(--dark);
+  }
+  .step:nth-child(1) .step-dot { border-color: var(--red); color: var(--red); }
+  .step:nth-child(2) .step-dot { border-color: var(--orange); color: var(--orange); }
+  .step:nth-child(3) .step-dot { border-color: var(--magenta); color: var(--magenta); }
+  .step:nth-child(4) .step-dot { border-color: var(--green); color: var(--green); }
+
+  .step-label {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-section {
+    padding: 120px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cta-banner {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 72px 80px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(230,58,30,0.3) 0%, transparent 60%);
+    pointer-events: none;
+    animation: ctaGlow 4s ease-in-out infinite alternate;
+  }
+
+  .cta-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(168,230,58,0.15) 0%, transparent 60%);
+    pointer-events: none;
+    animation: ctaGlow 4s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes ctaGlow {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  .cta-tag {
+    display: inline-block;
+    background: rgba(230,58,30,0.2);
+    border: 1px solid rgba(230,58,30,0.4);
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-title {
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 40px;
+    background: var(--green);
+    color: #0a0a0a;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .btn-tg:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .footer-brand {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-tg {
+    font-size: 13px;
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .footer-tg:hover { text-decoration: underline; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    /* header */
+    .header { padding: 0 24px; }
+    .what-grid { grid-template-columns: 1fr; }
+    .what-visual { display: none; }
+    .levels-grid { grid-template-columns: 1fr; }
+    .del-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .process-steps::before { display: none; }
+    .cta-banner { padding: 48px 32px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    .process-steps { grid-template-columns: 1fr; }
+  }
+
+  /* ── SCROLL FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="header">
+  <a href="#" class="nav-logo">
+    <img src="logo_site.svg" alt="Brand Genome logo" />
+   
+  </a>
+  <a href="https://t.me/brandgenome_bot" target="_blank" class="nav-cta">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.31 13.82l-2.965-.924c-.645-.202-.658-.645.136-.953l11.57-4.461c.537-.194 1.006.131.511.766z"/></svg>
+    Запустить в Telegram
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb-red"></div>
+  <div class="orb orb-green"></div>
+  <div class="orb orb-cyan"></div>
+  <div class="orb orb-yellow"></div>
+
+  <div class="hero-eyebrow">AI-powered branding tool &nbsp;·&nbsp; Genome — платформа для анализа и развития брендов</div>
+  <h1>Impression<br><span>Scan</span></h1>
+  <p class="hero-sub">Оценка первого впечатления потребителя от контакта с вашим Instagram-аккаунтом</p>
+
+  <div class="hero-actions">
+    <a href="https://t.me/brandgenome_bot" target="_blank" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c-.242.213-.054-.333-.373-.12L6.31 13.82l-2.965-.924c-.645-.202-.658-.645.136-.953l11.57-4.461c.537-.194 1.006.131.511.766z"/></svg>
+      Получить анализ
+    </a>
+    <a href="#levels" class="btn-ghost">Узнать больше</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- WHAT IS -->
+<div class="section">
+  <div class="what-grid">
+    <div class="fade-in">
+      <div class="section-label">О продукте</div>
+      <h2 class="section-title">Что такое<br>Brand Genome<br>Impression Scan?</h2>
+      <p class="section-body">Brand Genome показывает, как аудитория воспринимает ваш бренд — без догадок и субъективных оценок.</p>
+    </div>
+    <div class="what-visual fade-in">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring ring-4"></div>
+      <div class="ring ring-5"></div>
+      <div class="ring ring-6"></div>
+      <img src="logo_site.svg" alt="Brand Genome" style="width:120px;height:auto;position:relative;z-index:2;" />
+    </div>
+  </div>
+</div>
+
+<!-- 3 LEVELS -->
+<section class="levels-section" id="levels">
+  <div class="levels-inner">
+    <div class="section-label fade-in">Три уровня анализа</div>
+    <h2 class="section-title fade-in">3 уровня впечатления бренда</h2>
+
+    <div class="levels-grid">
+
+      <div class="level-card visual fade-in">
+        <div class="level-num">01</div>
+        <div class="level-icon">
+          <img src="icon_visual.png" alt="Визуальный" style="width:22px;height:auto;" />
+        </div>
+        <div class="level-name">Визуальный</div>
+        <div class="level-q">Эффект ореола</div>
+        <p class="level-desc">Какое общее впечатление человек переносит на отдельные характеристики бренда, только взглянув на вашу страницу?</p>
+        <div class="level-q">Якорное искажение</div>
+        <p class="level-desc">Первое, что считывает человек, задаёт тон всей последующей информации о вас.</p>
+      </div>
+
+      <div class="level-card semantic fade-in">
+        <div class="level-num">02</div>
+        <div class="level-icon">
+          <img src="icon_semantic.png" alt="Смысловой" style="width:22px;height:auto;" />
+        </div>
+        <div class="level-name">Смысловой</div>
+        <div class="level-q">Сухой остаток</div>
+        <p class="level-desc">Какие мысли и суждения сохранятся у человека после контакта с вашим брендом?</p>
+        <div class="level-q">Искажения смыслов</div>
+        <p class="level-desc">Семантические искажения приводят к подсознательному недоверию — мы их находим и устраняем.</p>
+      </div>
+
+      <div class="level-card audience fade-in">
+        <div class="level-num">03</div>
+        <div class="level-icon">
+          <img src="icon_audience.png" alt="Аудиторный" style="width:22px;height:auto;" />
+        </div>
+        <div class="level-name">Аудиторный</div>
+        <div class="level-q">Узнавание себя</div>
+        <p class="level-desc">Кто из аудитории видит себя в вашей коммуникации? Первый шаг к покупке — это узнавание своей идентичности.</p>
+        <div class="level-q">Чужой контент</div>
+        <p class="level-desc">Каким психотипам ваш контент кажется далёким — и почему они уходят.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="deliverables-section">
+  <div class="section-label fade-in">Что вы получаете</div>
+  <h2 class="section-title fade-in">Итоговый<br>отчёт</h2>
+
+  <div class="del-grid">
+    <div class="del-card fade-in">
+      <div class="del-number">01 —</div>
+      <div class="del-title">Ясность первого впечатления</div>
+      <p class="del-body">Вы поймёте, какое чувство и образ бренд оставляет у человека с первых секунд контакта с вашим аккаунтом.</p>
+    </div>
+    <div class="del-card fade-in">
+      <div class="del-number">02 —</div>
+      <div class="del-title">Подсветка ошибок</div>
+      <p class="del-body">Отчёт покажет, что мешает доверию к бренду и где коммуникация работает не так, как было задумано.</p>
+    </div>
+    <div class="del-card fade-in">
+      <div class="del-number">03 —</div>
+      <div class="del-title">Карта отклика аудитории</div>
+      <p class="del-body">Станет видно, какие сегменты находят себя в вашем контенте, а какие его не принимают — с конкретными рекомендациями.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REPORT PREVIEW -->
+<section class="section report-preview">
+  <div class="report-piles">
+    <div class="pile fade-in">
+      <div class="pile-stack">
+        <img src="screen_1.png" alt="Визуальный 1" />
+        <img src="screen_2.png" alt="Визуальный 2" />
+        <img src="screen_a1.png" alt="Визуальный 3" />
+      </div>
+    </div>
+    <div class="pile fade-in">
+      <div class="pile-stack">
+        <img src="screen_3.png" alt="Смысловой 1" />
+        <img src="screen_4.png" alt="Смысловой 2" />
+        <img src="screen_a2.png" alt="Смысловой 3" />
+      </div>
+    </div>
+    <div class="pile fade-in">
+      <div class="pile-stack">
+        <img src="screen_6.png" alt="Психотип 2" />
+        <img src="screen_7.png" alt="Психотип 3" />
+        <img src="screen_a3.png" alt="Психотип 4" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="process-inner">
+    <div class="section-label fade-in">Как это работает</div>
+    <h2 class="section-title fade-in">Четыре шага<br>до результата</h2>
+
+    <div class="process-steps fade-in">
+      <div class="step">
+        <div class="step-dot">1</div>
+        <div class="step-label">Запрос</div>
+        <p class="step-desc">Вы отправляете ссылку на Instagram-аккаунт бренда в Telegram-бот.</p>
+      </div>
+      <div class="step">
+        <div class="step-dot">2</div>
+        <div class="step-label">Анализ</div>
+        <p class="step-desc">AI сканирует визуальный, смысловой и аудиторный уровни вашего контента.</p>
+      </div>
+      <div class="step">
+        <div class="step-dot">3</div>
+        <div class="step-label">Отчёт</div>
+        <p class="step-desc">Вы получаете структурированный PDF с выводами, искажениями и рекомендациями.</p>
+      </div>
+      <div class="step">
+        <div class="step-dot">4</div>
+        <div class="step-label">Действие</div>
+        <p class="step-desc">Используйте данные, чтобы усилить бренд и привлечь нужную аудиторию.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-banner fade-in">
+    <div class="cta-tag">Telegram Bot</div>
+    <h2 class="cta-title">Узнайте, как вас<br>видят люди</h2>
+    <p class="cta-sub">Получите объективный анализ первого впечатления вашего бренда на ваш еmail адрес — быстро и без лишних формальностей.</p>
+    <div class="cta-actions">
+      <a href="https://t.me/brandgenome_bot" target="_blank" class="btn-tg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.31 13.82l-2.965-.924c-.645-.202-.658-.645.136-.953l11.57-4.461c.537-.194 1.006.131.511.766z"/></svg>
+        @brandgenome_bot
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 BrandGenome</span>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
+
