@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Brand Genome",
+  "name": "Brand Genome — AI Brand Intelligence Platform",
+  "description": "AI-powered brand intelligence platform. Impression Scan, Archetype Discovery, and 5-Second Test.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#6C5CE7",
+  "background_color": "#ffffff",
+  "categories": ["business", "productivity"]
 }
